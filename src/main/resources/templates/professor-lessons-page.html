@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring web-app</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+          crossorigin="anonymous">
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-5 border-bottom">
+        <span class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <img src="/images/kpi-logo.png"
+                 width="50"
+                 height="50"
+                 class="d-inline-block align-top me-4"
+                 alt="KPI">
+            <span class="fs-4">Electronic journal of students' progress</span>
+        </span>
+
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Lessons</a></li>
+            <li class="nav-item"><a href="/prof/all-students" class="nav-link">Students</a></li>
+            <li class="nav-item"><a href="/prof/all-profs" class="nav-link">Professors</a></li>
+            <li class="nav-item"><a href="/prof/about" class="nav-link">About</a></li>
+            <li class="nav-item"><a href="/" class="nav-link">Log out</a></li>
+        </ul>
+    </header>
+</div>
+
+<div class="container mb-5">
+    <button type="button" class="btn btn-primary mb-3">Add new lesson</button>
+    <table class="table table-responsive table-hover">
+        <thead>
+        <tr>
+            <th scope="col">LessonId</th>
+            <th scope="col">Subject name</th>
+            <th scope="col">Week day</th>
+            <th scope="col">Class number</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr style="cursor: pointer" th:each="lesson : ${lessons}">
+                <td th:text="${lesson.getLessonId()}"></td>
+                <td th:text="${lesson.getSubjectName()}"></td>
+                <td th:text="${lesson.getWeekDay()}"></td>
+                <td th:text="${lesson.getClassNumber()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer class="container">
+    <hr>
+    <p>&copy; KPI 2023</p>
+</footer>
+</body>
+</html>
