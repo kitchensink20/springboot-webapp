@@ -17,13 +17,11 @@ public class JournalRecordRepositoryStub {
         JournalRecord record3 = new JournalRecord(3, "Maksym Bidnyi", LocalDate.of(2004, 2, 20),true, "jgfrwpifjrew");
         JournalRecord record4 = new JournalRecord(4, "Matylda Starzynska", LocalDate.of(1999, 5, 29),true, "kf;ewkjf");
         JournalRecord record5 = new JournalRecord(5, "Anna Ivasishyna", LocalDate.of(2004, 2, 23),true, "dkfpdswjfpkrswde");
-        JournalRecord record6 = new JournalRecord(6, "<div class=\"container\">hallo</div>", LocalDate.of(2004, 2, 23),true, "dkfpdswjfpkdtgetrswde");
         records.add(record1);
         records.add(record2);
         records.add(record3);
         records.add(record4);
         records.add(record5);
-        records.add(record6);
     }
 
     public JournalRecord findById(int id) {

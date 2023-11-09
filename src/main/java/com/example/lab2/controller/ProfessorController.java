@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -24,9 +25,9 @@ public class ProfessorController {
     @Autowired
     LessonService lessonService;
 
-    @GetMapping("/all-lessons")
-    public String getProfessorLessons(Model model) {
-        List<Lesson> lessons = lessonService.findLessonsByProfId(2);
+    @GetMapping("/{profId}/all-lessons")
+    public String getProfessorLessons(@PathVariable(value="profId") int profId,  Model model) {
+        List<Lesson> lessons = lessonService.findLessonsByProfId(profId);
         model.addAttribute("lessons", lessons);
         return "professor-lessons-page";
     }
