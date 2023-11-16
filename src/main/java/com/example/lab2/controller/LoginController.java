@@ -1,6 +1,5 @@
 package com.example.lab2.controller;
 
-import com.example.lab2.enums.AppError;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
