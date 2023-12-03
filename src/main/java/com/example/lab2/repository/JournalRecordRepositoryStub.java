@@ -1,15 +1,20 @@
 package com.example.lab2.repository;
 
 import com.example.lab2.model.JournalRecord;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
 public class JournalRecordRepositoryStub {
-    private static List<JournalRecord> records = new ArrayList<JournalRecord>();
+    private static final List<JournalRecord> records = new ArrayList<JournalRecord>();
 
     static {
         JournalRecord record1 = new JournalRecord(1, "Ivan Tolkunov", LocalDate.of(2001, 7, 7),true, "jfesofjh2*");
@@ -42,11 +47,29 @@ public class JournalRecordRepositoryStub {
         return records;
     }
 
-    public void createRecord(JournalRecord student) {
-        records.add(student);
+    public Page<JournalRecord> findAll(Pageable pageable) {
+        int pageSize = pageable.getPageSize();
+        int currentPage = pageable.getPageNumber();
+        int startIndex = pageSize * currentPage;
+
+        List<JournalRecord> result;
+
+        if(records.size() < startIndex || pageSize < 1)
+            result = new ArrayList<JournalRecord>();
+        else {
+            int toIndex = Math.min(startIndex + pageSize, records.size());
+            result =  new ArrayList<>(records.subList(startIndex, toIndex));
+        }
+
+        return new PageImpl<>(result, PageRequest.of(currentPage, pageSize), records.size());
     }
 
-    public void updateRecord(JournalRecord student) {
+    public JournalRecord createRecord(JournalRecord student) {
+        records.add(student);
+        return student;
+    }
+
+    public JournalRecord updateRecord(JournalRecord student) {
         JournalRecord studentToUpdate = records.stream()
                 .filter(s -> s.getStudentId() == student.getStudentId())
                 .findAny().orElse(null);
@@ -54,6 +77,7 @@ public class JournalRecordRepositoryStub {
             studentToUpdate.setFullName(student.getFullName());
             studentToUpdate.setFullTimeEducationForm(student.isFullTimeEducationForm());
         }
+        return studentToUpdate;
     }
 
     public void deleteById(int id) {

@@ -2,9 +2,13 @@ package com.example.lab2.service;
 
 import com.example.lab2.model.JournalRecord;
 import com.example.lab2.repository.JournalRecordRepositoryStub;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class JournalRecordService {
@@ -26,12 +30,16 @@ public class JournalRecordService {
         return journalRecordRepository.findAll();
     }
 
-    public void createRecord(JournalRecord student) {
-        journalRecordRepository.createRecord(student);
+    public Page<JournalRecord> findAll(Pageable pageable) {
+        return journalRecordRepository.findAll(pageable);
     }
 
-    public void updateRecord(JournalRecord student) {
-        journalRecordRepository.updateRecord(student);
+    public JournalRecord createRecord(JournalRecord student) {
+        return journalRecordRepository.createRecord(student);
+    }
+
+    public JournalRecord updateRecord(JournalRecord student) {
+        return journalRecordRepository.updateRecord(student);
     }
 
     public void deleteById(int id) {

@@ -1,11 +1,19 @@
 package com.example.lab2.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.time.LocalDate;
 
+@Entity
 public class JournalRecord {
-    private final int studentId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int studentId;
     private String fullName;
-    private final LocalDate birthday;
+    private LocalDate birthday;
     private boolean isFullTimeEducationForm;
     private String password;
 
@@ -16,6 +24,8 @@ public class JournalRecord {
         this.isFullTimeEducationForm = fullTimeEducationForm;
         this.password = password;
     }
+
+    public JournalRecord() { }
 
     public int getStudentId() {
         return studentId;
@@ -35,9 +45,13 @@ public class JournalRecord {
 
     public String getPassword() { return password; }
 
+    public void setStudentId(int studentId) { this.studentId = studentId; }
+
     public void setFullName(String fullName) {
         this.fullName = fullName;
     }
+
+    public void setBirthday(LocalDate birthday) { this.birthday = birthday; }
 
     public void setFullTimeEducationForm(boolean isFullTimeEducationForm) {
         this.isFullTimeEducationForm = isFullTimeEducationForm;

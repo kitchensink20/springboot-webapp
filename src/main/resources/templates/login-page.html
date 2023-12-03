@@ -49,10 +49,10 @@
         <div th:if="${error}" class="alert alert-danger mt-3" role="alert">
             <div th:switch="${error}">
                 <span th:case="${T(com.example.lab2.enums.AppError).INCORRECT_PASSWORD}">
-                    The ID does not exist!
+                    The password is not correct!
                 </span>
                 <span th:case="${T(com.example.lab2.enums.AppError).INCORRECT_ID}">
-                    The password is not correct!
+                    The ID does not exist!
                 </span>
                 <span th:case="${T(com.example.lab2.enums.AppError).ACCESS_DENIED}">
                     Access denied!
