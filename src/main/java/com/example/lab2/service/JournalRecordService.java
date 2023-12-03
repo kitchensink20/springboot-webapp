@@ -26,6 +26,8 @@ public class JournalRecordService {
         return journalRecordRepository.findByFullName(fullName);
     }
 
+    public List<JournalRecord> filterByName(String name) { return journalRecordRepository.filterByName(name); }
+
     public List<JournalRecord> findAll() {
         return journalRecordRepository.findAll();
     }

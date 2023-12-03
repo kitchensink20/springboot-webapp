@@ -64,6 +64,12 @@ public class JournalRecordRepositoryStub {
         return new PageImpl<>(result, PageRequest.of(currentPage, pageSize), records.size());
     }
 
+    public List<JournalRecord> filterByName(String name) {
+        return records.stream()
+                .filter(s -> s.getFullName().contains(name))
+                .toList();
+    }
+
     public JournalRecord createRecord(JournalRecord student) {
         records.add(student);
         return student;
