@@ -1,20 +1,16 @@
 package com.example.lab2.service;
 
 import com.example.lab2.model.JournalRecord;
-import com.example.lab2.repository.JournalRecordRepositoryStub;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import com.example.lab2.repository.JournalRecordRepositoryImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class JournalRecordService {
-    private final JournalRecordRepositoryStub journalRecordRepository;
+    private final JournalRecordRepositoryImpl journalRecordRepository;
 
-    public JournalRecordService(JournalRecordRepositoryStub journalRecordRepository) {
+    public JournalRecordService(JournalRecordRepositoryImpl journalRecordRepository) {
         this.journalRecordRepository = journalRecordRepository;
     }
 
@@ -22,26 +18,16 @@ public class JournalRecordService {
         return  journalRecordRepository.findById(id);
     }
 
-    public JournalRecord findByFullName(String fullName) {
-        return journalRecordRepository.findByFullName(fullName);
-    }
-
-    public List<JournalRecord> filterByName(String name) { return journalRecordRepository.filterByName(name); }
-
     public List<JournalRecord> findAll() {
         return journalRecordRepository.findAll();
     }
 
-    public Page<JournalRecord> findAll(Pageable pageable) {
-        return journalRecordRepository.findAll(pageable);
-    }
-
     public JournalRecord createRecord(JournalRecord student) {
-        return journalRecordRepository.createRecord(student);
+        return journalRecordRepository.create(student);
     }
 
     public JournalRecord updateRecord(JournalRecord student) {
-        return journalRecordRepository.updateRecord(student);
+        return journalRecordRepository.update(student);
     }
 
     public void deleteById(int id) {

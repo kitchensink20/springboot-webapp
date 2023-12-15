@@ -14,27 +14,4 @@ public class ProfessorService {
         this.professorRepository = professorRepository;
     }
 
-    public Professor findById(int id) {
-        return professorRepository.findById(id);
-    }
-
-    public Professor findByFullName(String fullName) {
-        return professorRepository.findByFullName(fullName);
-    }
-
-    public List<Professor> findAll() {
-        return professorRepository.findAll();
-    }
-
-    public void createProfessor(Professor professor) {
-        professorRepository.createProfessor(professor);
-    }
-
-    public void updateProfessor(Professor professor) {
-        professorRepository.updateProfessor(professor);
-    }
-
-    public void deleteById(int id) {
-        professorRepository.deleteById(id);
-    }
 }

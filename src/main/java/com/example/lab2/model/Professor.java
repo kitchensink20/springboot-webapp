@@ -1,9 +1,15 @@
 package com.example.lab2.model;
 
-import java.util.Objects;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
 public class Professor {
-    private final int professorId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int professorId;
     private String fullName;
     private String position;
     private String password;
@@ -14,6 +20,8 @@ public class Professor {
         this.position = position;
         this.password = password;
     }
+
+    public Professor() { }
 
     public int getProfessorId() {
         return professorId;
@@ -28,6 +36,10 @@ public class Professor {
     }
 
     public String getPassword() { return password; }
+
+    public void setProfessorId(int professorId) {
+        this.professorId = professorId;
+    }
 
     public void setFullName(String fullName) {
         this.fullName = fullName;

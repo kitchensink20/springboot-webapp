@@ -1,8 +1,7 @@
-package com.example.lab2.restContoller;
+package com.example.lab2.controller;
 
 import com.example.lab2.model.JournalRecord;
 import com.example.lab2.service.JournalRecordService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiParam;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -68,74 +67,6 @@ public class JournalRecordController {
             return new ResponseEntity<>(foundJournalRecord, HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @Operation (
-            description = "Gets all journal records, data can be returned partially due to specifying page number and page size.",
-            summary = "Get all journal records with pagination",
-            responses = {
-                    @ApiResponse(
-                            description = "OK",
-                            responseCode = "200"
-                    )
-            }
-    )
-    @GetMapping
-    public Page<JournalRecord> getAllJournalRecords(
-            @ApiParam(name = "pageNumber",
-                        value = "Number of the page.",
-                        type = "integer",
-                        example = "3")
-            @RequestParam(defaultValue =  "0") int page,
-            @ApiParam(name = "pageSize",
-                    value = "Size of the page.",
-                    type = "integer",
-                    example = "2")
-            @RequestParam(defaultValue = "10") int size) {
-        return journalRecordService.findAll(PageRequest.of(page, size));
-    }
-
-    @Operation (
-            description = "Gets journal records filtered by name, ID needs to be specified in reguest param.",
-            summary = "Get journal records filtered by name",
-            responses =  {
-                    @ApiResponse(
-                            description = "Success",
-                            responseCode = "200",
-                            content = @Content(
-                                    mediaType = "application/json",
-                                    examples = @ExampleObject(
-                                            name =  "ExampleJournalRecord",
-                                            value = "[{\"studentId\": 1, \"fullName\": \"Ivan Tolkunov\", \"birthday\": \"2001-07-07\", \"isFullTimeEducationForm\": true, \"password\": \"hashed\" }," +
-                                                    "{\"studentId\": 8, \"fullName\": \"Ivan Sikorsku\", \"birthday\": \"2001-02-01\", \"isFullTimeEducationForm\": true, \"password\": \"hashed\" }]"
-                                    )
-                            )
-                    ),
-                    @ApiResponse(
-                            description = "Not Found",
-                            responseCode = "404",
-                            content = @Content(
-                                    mediaType = "application/json",
-                                    examples = @ExampleObject(
-                                            name = "NotFoundResponse",
-                                            value = ""
-                                    )
-                            )
-                    )
-            }
-    )
-    @GetMapping(value = "/filterByName", produces = "application/json")
-    public ResponseEntity<List<JournalRecord>> getAllJournalRecordsFilteredByName(
-            @ApiParam(name = "studentName",
-                    value = "Student's name.",
-                    type = "string",
-                    example = "Ivan")
-            @RequestParam String name) {
-        List<JournalRecord> filteredJournalRecords = journalRecordService.filterByName(name);
-
-        if(filteredJournalRecords.isEmpty())
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        else return new ResponseEntity<>(filteredJournalRecords, HttpStatus.OK);
     }
 
     @Operation (

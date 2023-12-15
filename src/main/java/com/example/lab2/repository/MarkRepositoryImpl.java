@@ -1,30 +1,29 @@
 package com.example.lab2.repository;
 
-import com.example.lab2.model.Professor;
+import com.example.lab2.model.Mark;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public class ProfessorRepositoryStub implements GenericRepository<Professor> {
-
+public class MarkRepositoryImpl implements GenericRepository<Mark> {
     @Override
-    public Professor findById(int id) {
+    public Mark findById(int id) {
         return null;
     }
 
     @Override
-    public List<Professor> findAll() {
+    public List<Mark> findAll() {
         return null;
     }
 
     @Override
-    public Professor create(Professor newEntity) {
+    public Mark create(Mark newEntity) {
         return null;
     }
 
     @Override
-    public Professor update(Professor modifiedEntity) {
+    public Mark update(Mark modifiedEntity) {
         return null;
     }
 
